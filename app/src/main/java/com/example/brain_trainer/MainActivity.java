@@ -11,6 +11,7 @@ import android.widget.Button;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.gridlayout.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -53,14 +54,6 @@ public class MainActivity extends AppCompatActivity {
         buttons.add(b1);
         buttons.add(b2);
         buttons.add(b3);
-
-
-
-
-
-
-
-
     }
 
     public void chooseAnswer(View view) {
@@ -90,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+
                 again.setVisibility(View.VISIBLE);
                 again.setEnabled(true);
                 for(Button bt : buttons)
@@ -114,32 +108,26 @@ public class MainActivity extends AppCompatActivity {
 
         disQ = String.valueOf(a)+"+"+String.valueOf(b);
         que.setText(disQ);
-        for(int i=0;i<3;i++)
+        options.clear();
+        for(int i=0;i<4;i++)
         {
+
             if(i==c)
             {
                 options.add(a+b);
             }
-            d  = (random.nextInt(41));
+            else{
+                d  = (random.nextInt(41));
             while (d==(a+b)||options.contains(d))
-            {  d  = (random.nextInt(41));}
-            {options.add(d+(10));}
+            {  d  = (random.nextInt(41));
+                
+            }
+            options.add(d);
+            }
 
         }
+        setBtns();
 
-        for(Button bts:buttons)
-        {
-
-            if(bts.getTag().equals(String.valueOf(c)))
-            {
-                bts.setText(String.valueOf(a+b));
-            }
-            else
-            {
-                String abd = (String) bts.getTag();
-                bts.setText(String.valueOf(Integer.valueOf(options.get(Integer.valueOf(abd)))));
-            }
-        }
     }
 
     public void show()
@@ -160,4 +148,11 @@ public class MainActivity extends AppCompatActivity {
             ans.setText("");
 
         }
+    public void setBtns()
+    {
+        b0.setText(Integer.toString(options.get(0)));
+        b1.setText(Integer.toString(options.get(1)));
+        b2.setText(Integer.toString(options.get(2)));
+        b3.setText(Integer.toString(options.get(3)));
+    }
 }
